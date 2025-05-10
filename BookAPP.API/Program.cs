@@ -11,6 +11,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // Injeta os repositórios
 builder.Services.AddScoped<ILivroRepository, LivroRepository>();
+builder.Services.AddScoped<IAutorRepository, AutorRepository>();
+
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
