@@ -1,0 +1,24 @@
+# Build results
+bin/
+obj/
+*.dll
+*.exe
+
+# User-specific files
+*.user
+*.suo
+
+# Dotnet tools
+.vscode/
+*.vs/
+*.log
+
+# Secrets
+secrets.json
+
+# EF Core
+Migrations/
+
+# Other
+*.db
+.env

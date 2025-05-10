@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookAPP.API", "BookAPP.API\BookAPP.API.csproj", "{098EA34E-16D2-471B-84A7-EAB33CF22C84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookAPP.Domain", "BookAPP.Domain\BookAPP.Domain.csproj", "{E8FB895B-1CEC-4969-BFCF-A98770885347}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookAPP.Repository", "BookAPP.Repository\BookAPP.Repository.csproj", "{76566E7F-64FE-4BED-83D4-4A9FE849124D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{098EA34E-16D2-471B-84A7-EAB33CF22C84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{098EA34E-16D2-471B-84A7-EAB33CF22C84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{098EA34E-16D2-471B-84A7-EAB33CF22C84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{098EA34E-16D2-471B-84A7-EAB33CF22C84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8FB895B-1CEC-4969-BFCF-A98770885347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8FB895B-1CEC-4969-BFCF-A98770885347}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8FB895B-1CEC-4969-BFCF-A98770885347}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8FB895B-1CEC-4969-BFCF-A98770885347}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76566E7F-64FE-4BED-83D4-4A9FE849124D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76566E7F-64FE-4BED-83D4-4A9FE849124D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76566E7F-64FE-4BED-83D4-4A9FE849124D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76566E7F-64FE-4BED-83D4-4A9FE849124D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
