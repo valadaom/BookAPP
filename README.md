@@ -40,11 +40,17 @@ git clone https://github.com/valadaom/BookAPP.git
 cd BookAPP
 ```
 
-## Restaurar os pacotes
+### Restaurar os pacotes
+```bash
 dotnet restore
+```
 
-## Gerar o banco de dados
+### Gerar o banco de dados
+```bash
 dotnet ef database update --project BookAPP.Repository/BookAPP.Repository.csproj --startup-project BookAPP.API/BookAPP.API.csproj
+```
 
-## Rodar a aplicação
+### Rodar a aplicação
+```bash
 dotnet run --project BookAPP.API
+```
