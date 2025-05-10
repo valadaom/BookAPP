@@ -12,6 +12,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Injeta os repositórios
 builder.Services.AddScoped<ILivroRepository, LivroRepository>();
 builder.Services.AddScoped<IAutorRepository, AutorRepository>();
+builder.Services.AddScoped<IAssuntoRepository, AssuntoRepository>();
+
 
 
 // Swagger
