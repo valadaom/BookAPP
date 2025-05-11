@@ -20,8 +20,23 @@ namespace BookAPP.Domain.DTOs.LivroDTO
             livro.Edicao = Edicao;
             livro.AnoPublicacao = AnoPublicacao;
 
-            livro.Livro_Autores = AutoresIds.Select(id => new Livro_Autor { Livro_CodL = CodL, Autor_CodAu = id }).ToList();
-            livro.Livro_Assuntos = AssuntosIds.Select(id => new Livro_Assunto { Livro_CodL = CodL, Assunto_CodAs = id }).ToList();
+            foreach (var id in AutoresIds.Distinct())
+            {
+                livro.Livro_Autores.Add(new Livro_Autor
+                {
+                    Livro_CodL = livro.CodL,
+                    Autor_CodAu = id
+                });
+            }
+
+            foreach (var id in AssuntosIds.Distinct())
+            {
+                livro.Livro_Assuntos.Add(new Livro_Assunto
+                {
+                    Livro_CodL = livro.CodL,
+                    Assunto_CodAs = id
+                });
+            }
         }
     }
 

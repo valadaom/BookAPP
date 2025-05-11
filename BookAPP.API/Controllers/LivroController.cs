@@ -37,20 +37,15 @@ namespace BookAPP.API.Controllers
             var livroEntity = dto.ToLivroEntity();
 
             await _livroRepository.AddAsync(livroEntity);
-            return CreatedAtAction(nameof(GetById), new { id = livroEntity.CodL }, livroEntity);
+            return Created();
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] LivroUpdateDto dto)
         {
             if (id != dto.CodL) return BadRequest();
-
-            var existente = await _livroRepository.GetByIdAsync(id);
-            if (existente == null) return NotFound();
-
-            dto.UpdateLivroEntity(existente);
-            await _livroRepository.UpdateAsync(existente);
-            return NoContent();
+            await _livroRepository.UpdateAsync(dto);
+            return Ok();
         }
 
         [HttpDelete("{id}")]
