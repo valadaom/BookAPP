@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using BookAPP.Domain.Entities;
+﻿using BookAPP.Domain.DTOs.LivroDTO;
 using BookAPP.Domain.Interfaces;
-using BookAPP.Domain.DTOs.LivroDTO;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BookAPP.API.Controllers
 {

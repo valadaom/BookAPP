@@ -13,7 +13,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<ILivroRepository, LivroRepository>();
 builder.Services.AddScoped<IAutorRepository, AutorRepository>();
 builder.Services.AddScoped<IAssuntoRepository, AssuntoRepository>();
-
+builder.Services.AddScoped<ILivroFormaCompraRepository, LivroFormaCompraRepository>();
+builder.Services.AddScoped<IFormaCompraRepository, FormaCompraRepository>();
 
 
 // Swagger

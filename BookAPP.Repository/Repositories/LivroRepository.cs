@@ -20,6 +20,7 @@ namespace BookAPP.Repository.Repositories
             var livros = await _context.Livro
                 .Include(l => l.Livro_Autores).ThenInclude(la => la.Autor)
                 .Include(l => l.Livro_Assuntos).ThenInclude(la => la.Assunto)
+                .Include(l => l.Livro_FormasCompra).ThenInclude(lf => lf.FormaCompra)
                 .ToListAsync();
 
             return livros.Select(LivroReadDto.FromEntity);
