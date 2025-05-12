@@ -40,29 +40,25 @@ namespace BookAPP.Repository.Repositories
 
             if (livroExistente != null)
             {
-                // Atualiza as propriedades do livro
                 livroExistente.Titulo = livro.Titulo;
                 livroExistente.Editora = livro.Editora;
                 livroExistente.Edicao = livro.Edicao;
                 livroExistente.AnoPublicacao = livro.AnoPublicacao;
 
-                // Atualiza a lista de autores (livro pode ter múltiplos autores)
-                livroExistente.Livro_Autores.Clear(); // Remove os autores antigos
+                livroExistente.Livro_Autores.Clear();
                 livroExistente.Livro_Autores = livro.AutoresIds.Select(autor => new Livro_Autor
                 {
                     Livro_CodL = livro.CodL,
                     Autor_CodAu = autor
                 }).ToList();
 
-                // Atualiza a lista de assuntos (livro pode ter múltiplos assuntos)
-                livroExistente.Livro_Assuntos.Clear(); // Remove os assuntos antigos
+                livroExistente.Livro_Assuntos.Clear();
                 livroExistente.Livro_Assuntos = livro.AssuntosIds.Select(assunto => new Livro_Assunto
                 {
                     Livro_CodL = livro.CodL,
                     Assunto_CodAs = assunto
                 }).ToList();
 
-                // Salva as alterações no banco
                 await _context.SaveChangesAsync();
             }
         }
