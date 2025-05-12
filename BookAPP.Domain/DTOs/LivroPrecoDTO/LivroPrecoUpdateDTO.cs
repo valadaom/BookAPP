@@ -1,8 +1,7 @@
-﻿namespace BookAPP.Domain.DTOs.LivroPrecoDTO
+﻿namespace BookAPP.Domain.DTOs.LivroPrecoDTO;
+
+public class LivroPrecoUpdateDto
 {
-    public class LivroPrecoUpdateDto
-    {
-        public int LivroCodL { get; set; }
-        public List<PrecoUnitarioDto> Precos { get; set; } = new();
-    }
+    public int LivroCodL { get; set; }
+    public List<PrecoUnitarioDto> Precos { get; set; } = new();
 }

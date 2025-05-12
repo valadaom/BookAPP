@@ -16,21 +16,13 @@ public class AssuntoController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
-    {
-        var assuntos = await _assuntoRepository.GetAllAsync();
-        var result = assuntos.Select(AssuntoReadDto.FromEntity);
-        return Ok(result);
-    }
+    public async Task<IEnumerable<AssuntoReadDto>> GetAll()
+        => (await _assuntoRepository.GetAllAsync())
+             .Select(AssuntoReadDto.FromEntity);
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(int id)
-    {
-        var assunto = await _assuntoRepository.GetByIdAsync(id);
-        if (assunto == null) return NotFound();
-
-        return Ok(AssuntoReadDto.FromEntity(assunto));
-    }
+    public async Task<AssuntoReadDto> GetById(int id)
+        => AssuntoReadDto.FromEntity(await _assuntoRepository.GetByIdAsync(id));
 
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] AssuntoCreateDto dto)
@@ -45,21 +37,16 @@ public class AssuntoController : ControllerBase
     {
         if (id != dto.CodAs) return BadRequest();
 
-        var assunto = await _assuntoRepository.GetByIdAsync(id);
-        if (assunto == null) return NotFound();
-
-        dto.UpdateEntity(assunto);
-        await _assuntoRepository.UpdateAsync(assunto);
-        return NoContent();
+        var entity = await _assuntoRepository.GetByIdAsync(id);
+        dto.UpdateEntity(entity);
+        await _assuntoRepository.UpdateAsync(entity);
+        return Ok();
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var assunto = await _assuntoRepository.GetByIdAsync(id);
-        if (assunto == null) return NotFound();
-
         await _assuntoRepository.DeleteAsync(id);
-        return NoContent();
+        return Ok();
     }
 }

@@ -20,7 +20,7 @@ public class LivroFormaCompraController : ControllerBase
     public async Task<IActionResult> AtualizarPrecos([FromBody] LivroPrecoUpdateDto dto)
     {
         await _repository.UpdatePrecosAsync(dto);
-        return NoContent();
+        return Ok();
     }
 
     [HttpGet("{livroId}")]

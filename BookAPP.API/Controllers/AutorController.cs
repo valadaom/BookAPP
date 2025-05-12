@@ -1,6 +1,8 @@
-﻿using BookAPP.Domain.DTOs.AutorDTO;
+﻿using BookAPP.Domain.DTOs.AssuntoDtos;
+using BookAPP.Domain.DTOs.AutorDTO;
 using BookAPP.Domain.DTOs.AutorDtos;
 using BookAPP.Domain.Interfaces;
+using BookAPP.Repository.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookAPP.API.Controllers;
@@ -17,21 +19,13 @@ public class AutorController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
-    {
-        var autores = await _autorRepository.GetAllAsync();
-        var result = autores.Select(AutorReadDto.FromEntity);
-        return Ok(result);
-    }
+    public async Task<IEnumerable<AutorReadDto>> GetAll()
+    => (await _autorRepository.GetAllAsync())
+             .Select(AutorReadDto.FromEntity);
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(int id)
-    {
-        var autor = await _autorRepository.GetByIdAsync(id);
-        if (autor == null) return NotFound();
-
-        return Ok(AutorReadDto.FromEntity(autor));
-    }
+    public async Task<AutorReadDto> GetById(int id)
+     => AutorReadDto.FromEntity(await _autorRepository.GetByIdAsync(id));
 
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] AutorCreateDto dto)
@@ -51,16 +45,13 @@ public class AutorController : ControllerBase
 
         dto.UpdateAutorEntity(autor);
         await _autorRepository.UpdateAsync(autor);
-        return NoContent();
+        return Ok();
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var autor = await _autorRepository.GetByIdAsync(id);
-        if (autor == null) return NotFound();
-
         await _autorRepository.DeleteAsync(id);
-        return NoContent();
+        return Ok();
     }
 }

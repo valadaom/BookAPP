@@ -16,19 +16,12 @@ namespace BookAPP.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            var livros = await _livroRepository.GetAllAsync();
-            return Ok(livros);
-        }
+        public async Task<IEnumerable<LivroReadDto>> GetAll()
+            => await _livroRepository.GetAllAsync();
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var livro = await _livroRepository.GetByIdAsync(id);
-            if (livro == null) return NotFound();
-            return Ok(livro);
-        }
+        public async Task<LivroReadDto> GetById(int id)
+            => LivroReadDto.FromEntity(await _livroRepository.GetByIdAsync(id));
 
         [HttpPost]
         public async Task<IActionResult> Create(LivroCreateDto dto)
@@ -50,11 +43,8 @@ namespace BookAPP.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var livro = await _livroRepository.GetByIdAsync(id);
-            if (livro == null) return NotFound();
-
             await _livroRepository.DeleteAsync(id);
-            return NoContent();
+            return Ok();
         }
     }
 }
