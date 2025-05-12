@@ -15,6 +15,7 @@ builder.Services.AddScoped<IAutorRepository, AutorRepository>();
 builder.Services.AddScoped<IAssuntoRepository, AssuntoRepository>();
 builder.Services.AddScoped<ILivroFormaCompraRepository, LivroFormaCompraRepository>();
 builder.Services.AddScoped<IFormaCompraRepository, FormaCompraRepository>();
+builder.Services.AddScoped<IRelatorioRepository, RelatorioRepository>();
 
 
 // Swagger

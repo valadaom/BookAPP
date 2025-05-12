@@ -54,3 +54,23 @@ dotnet ef database update --project BookAPP.Repository/BookAPP.Repository.csproj
 ```bash
 dotnet run --project BookAPP.API
 ```
+
+#### Script view usada para geração do relatório
+```bash
+CREATE VIEW vw_RelatorioLivrosPorAutor AS
+SELECT
+    a.CodAu AS AutorId,
+    a.Nome AS AutorNome,
+    l.CodL AS LivroId,
+    l.Titulo,
+    l.Editora,
+    l.AnoPublicacao,
+    l.Edicao,
+    asu.CodAs AS AssuntoId,
+    asu.Descricao AS AssuntoDescricao
+FROM Autor a
+INNER JOIN Livro_Autor la ON a.CodAu = la.Autor_CodAu
+INNER JOIN Livro l ON l.CodL = la.Livro_CodL
+LEFT JOIN Livro_Assunto lasu ON lasu.Livro_CodL = l.CodL
+LEFT JOIN Assunto asu ON asu.CodAs = lasu.Assunto_CodAs
+```

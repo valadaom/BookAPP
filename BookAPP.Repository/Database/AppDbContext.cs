@@ -14,6 +14,7 @@ namespace BookAPP.Repository.Database
         public DbSet<Livro_Assunto> Livro_Assunto => Set<Livro_Assunto>();
         public DbSet<FormaCompra> FormaCompra { get; set; }
         public DbSet<Livro_FormaCompra> Livro_FormaCompra { get; set; }
+        public DbSet<VwRelatorioLivrosPorAutor> VwRelatorioLivrosPorAutor { get; set; } = null!;
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -63,6 +64,10 @@ namespace BookAPP.Repository.Database
                 new FormaCompra { CodFC = 3, Nome = "Self-service" },
                 new FormaCompra { CodFC = 4, Nome = "Evento" }
             );
+
+            modelBuilder.Entity<VwRelatorioLivrosPorAutor>()
+                .HasNoKey()
+                .ToView("vw_RelatorioLivrosPorAutor");
         }
     }
 }

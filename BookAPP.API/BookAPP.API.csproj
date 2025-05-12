@@ -7,17 +7,42 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Reports\RelatorioLivrosPorAutor.rdlc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\RelatorioLivrosPorAutor.rdlc" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="ReportViewerCore.NETCore" Version="15.1.26" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BookAPP.Domain\BookAPP.Domain.csproj" />
     <ProjectReference Include="..\BookAPP.Repository\BookAPP.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Reports\RelatorioDataSet.Designer.cs">
+      <DependentUpon>RelatorioDataSet.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Reports\RelatorioDataSet.xsd">
+      <SubType>Designer</SubType>
+      <LastGenOutput>RelatorioDataSet.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+    </None>
   </ItemGroup>
 
 </Project>
