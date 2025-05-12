@@ -1,17 +1,18 @@
 ﻿using BookAPP.Domain.Entities;
+using Microsoft.AspNetCore.Mvc;
 
-namespace BookAPP.Domain.DTOs.AutorDTO
+namespace BookAPP.Domain.DTOs.AutorDTO;
+
+[ModelMetadataType(typeof(Autor))]
+public class AutorCreateDto
 {
-    public class AutorCreateDto
-    {
-        public string Nome { get; set; } = string.Empty;
+    public string Nome { get; set; } = string.Empty;
 
-        public Autor ToAutorEntity()
+    public Autor ToAutorEntity()
+    {
+        return new Autor
         {
-            return new Autor
-            {
-                Nome = Nome
-            };
-        }
+            Nome = Nome
+        };
     }
 }

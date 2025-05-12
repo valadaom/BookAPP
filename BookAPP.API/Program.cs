@@ -1,5 +1,9 @@
+using BookAPP.API.Filters;
+using BookAPP.Domain.Exceptions;
 using BookAPP.Domain.Interfaces;
+using BookAPP.Domain.Interfaces.Infrastructure;
 using BookAPP.Repository.Database;
+using BookAPP.Repository.Factories;
 using BookAPP.Repository.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +14,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Injeta os repositórios
+builder.Services.AddScoped<IExceptionHandlerFactory, ExceptionHandlerFactory>();
 builder.Services.AddScoped<ILivroRepository, LivroRepository>();
 builder.Services.AddScoped<IAutorRepository, AutorRepository>();
 builder.Services.AddScoped<IAssuntoRepository, AssuntoRepository>();
@@ -23,7 +28,24 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Controllers
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<HttpResponseExceptionFilter>();
+})
+.ConfigureApiBehaviorOptions(options =>
+ {
+     options.InvalidModelStateResponseFactory = context =>
+     {
+         var errors = context.ModelState
+             .Where(ms => ms.Value.Errors.Count > 0)
+             .ToDictionary(
+                 kvp => kvp.Key,
+                 kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+             );
+
+         throw new ValidationException(errors);
+     };
+ });
 
 // CORS (opcional - se for consumir de outro domínio/front)
 builder.Services.AddCors(options =>

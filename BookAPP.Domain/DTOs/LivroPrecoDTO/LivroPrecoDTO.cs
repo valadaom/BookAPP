@@ -1,9 +1,8 @@
-﻿namespace BookAPP.Domain.DTOs.LivroPrecoDTO
+﻿namespace BookAPP.Domain.DTOs.LivroPrecoDTO;
+
+public class LivroPrecoDto
 {
-    public class LivroPrecoDto
-    {
-        public int CodFC { get; set; }
-        public string FormaCompra { get; set; } = string.Empty;
-        public decimal Preco { get; set; }
-    }
+    public int CodFC { get; set; }
+    public string FormaCompra { get; set; } = string.Empty;
+    public decimal Preco { get; set; }
 }

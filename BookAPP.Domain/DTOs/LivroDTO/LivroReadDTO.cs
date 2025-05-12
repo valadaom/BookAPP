@@ -2,51 +2,52 @@
 using BookAPP.Domain.DTOs.AutorDtos;
 using BookAPP.Domain.DTOs.LivroPrecoDTO;
 using BookAPP.Domain.Entities;
+using Microsoft.AspNetCore.Mvc;
 
-namespace BookAPP.Domain.DTOs.LivroDTO
+namespace BookAPP.Domain.DTOs.LivroDTO;
+
+[ModelMetadataType(typeof(Livro))]
+public class LivroReadDto
 {
-    public class LivroReadDto
+    public int CodL { get; set; }
+    public string Titulo { get; set; } = string.Empty;
+    public string Editora { get; set; } = string.Empty;
+    public int Edicao { get; set; }
+    public string AnoPublicacao { get; set; } = string.Empty;
+    public List<LivroPrecoDto> Precos { get; set; } = new();
+
+    public List<AutorReadDto> Autores { get; set; } = new();
+    public List<AssuntoReadDto> Assuntos { get; set; } = new();
+
+    public static LivroReadDto FromEntity(Livro livro)
     {
-        public int CodL { get; set; }
-        public string Titulo { get; set; } = string.Empty;
-        public string Editora { get; set; } = string.Empty;
-        public int Edicao { get; set; }
-        public string AnoPublicacao { get; set; } = string.Empty;
-        public List<LivroPrecoDto> Precos { get; set; } = new();
-
-        public List<AutorReadDto> Autores { get; set; } = new();
-        public List<AssuntoReadDto> Assuntos { get; set; } = new();
-
-        public static LivroReadDto FromEntity(Livro livro)
+        return new LivroReadDto
         {
-            return new LivroReadDto
+            CodL = livro.CodL,
+            Titulo = livro.Titulo,
+            Editora = livro.Editora,
+            Edicao = livro.Edicao,
+            AnoPublicacao = livro.AnoPublicacao,
+            Precos = livro.Livro_FormasCompra.Select(p => new LivroPrecoDto
             {
-                CodL = livro.CodL,
-                Titulo = livro.Titulo,
-                Editora = livro.Editora,
-                Edicao = livro.Edicao,
-                AnoPublicacao = livro.AnoPublicacao,
-                Precos = livro.Livro_FormasCompra.Select(p => new LivroPrecoDto
+                CodFC = p.FormaCompra_CodFC,
+                FormaCompra = p.FormaCompra.Nome,
+                Preco = p.Preco
+            }).ToList(),
+            Autores = livro.Livro_Autores
+                .Where(la => la.Autor != null)
+                .Select(la => new AutorReadDto
                 {
-                    CodFC = p.FormaCompra_CodFC,
-                    FormaCompra = p.FormaCompra.Nome,
-                    Preco = p.Preco
+                    CodAu = la.Autor.CodAu,
+                    Nome = la.Autor.Nome
                 }).ToList(),
-                Autores = livro.Livro_Autores
-                    .Where(la => la.Autor != null)
-                    .Select(la => new AutorReadDto
-                    {
-                        CodAu = la.Autor.CodAu,
-                        Nome = la.Autor.Nome
-                    }).ToList(),
-                Assuntos = livro.Livro_Assuntos
-                    .Where(la => la.Assunto != null)
-                    .Select(la => new AssuntoReadDto
-                    {
-                        CodAs = la.Assunto.CodAs,
-                        Descricao = la.Assunto.Descricao
-                    }).ToList()
-            };
-        }
+            Assuntos = livro.Livro_Assuntos
+                .Where(la => la.Assunto != null)
+                .Select(la => new AssuntoReadDto
+                {
+                    CodAs = la.Assunto.CodAs,
+                    Descricao = la.Assunto.Descricao
+                }).ToList()
+        };
     }
 }

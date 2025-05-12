@@ -1,7 +1,9 @@
 ﻿using BookAPP.Domain.Entities;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BookAPP.Domain.DTOs.AutorDtos;
 
+[ModelMetadataType(typeof(Autor))]
 public class AutorReadDto
 {
     public int CodAu { get; set; }
