@@ -18,17 +18,14 @@ namespace BookAPP.Repository.Repositories
         {
             var formasCompraIds = dto.Precos.Select(p => p.FormaCompraCodFC).ToList();
 
-            // 1. Carrega as formas de compra necessárias
             var formasCompra = await _context.FormaCompra
                 .Where(fc => formasCompraIds.Contains(fc.CodFC))
                 .ToListAsync();
 
-            // 2. Carrega os vínculos existentes para o livro
             var existentes = await _context.Livro_FormaCompra
                 .Where(x => x.Livro_CodL == dto.LivroCodL && formasCompraIds.Contains(x.FormaCompra_CodFC))
                 .ToListAsync();
 
-            // 3. Processa cada preço recebido
             foreach (var precoDto in dto.Precos)
             {
                 var existente = existentes

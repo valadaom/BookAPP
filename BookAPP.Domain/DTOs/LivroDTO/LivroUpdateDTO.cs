@@ -4,7 +4,7 @@ namespace BookAPP.Domain.DTOs.LivroDTO
 {
     public class LivroUpdateDto
     {
-        public int CodL { get; set; } // obrigatório para garantir a referência
+        public int CodL { get; set; }
         public string Titulo { get; set; } = string.Empty;
         public string Editora { get; set; } = string.Empty;
         public int Edicao { get; set; }
