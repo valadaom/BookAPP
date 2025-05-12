@@ -50,7 +50,7 @@ public class AssuntoController : ControllerBase
 
         dto.UpdateEntity(assunto);
         await _assuntoRepository.UpdateAsync(assunto);
-        return NoContent();
+        return Ok();
     }
 
     [HttpDelete("{id}")]
@@ -60,6 +60,6 @@ public class AssuntoController : ControllerBase
         if (assunto == null) return NotFound();
 
         await _assuntoRepository.DeleteAsync(id);
-        return NoContent();
+        return Ok();
     }
 }

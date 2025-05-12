@@ -54,7 +54,7 @@ namespace BookAPP.API.Controllers
             if (livro == null) return NotFound();
 
             await _livroRepository.DeleteAsync(id);
-            return NoContent();
+            return Ok();
         }
     }
 }

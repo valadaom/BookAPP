@@ -51,7 +51,7 @@ public class AutorController : ControllerBase
 
         dto.UpdateAutorEntity(autor);
         await _autorRepository.UpdateAsync(autor);
-        return NoContent();
+        return Ok();
     }
 
     [HttpDelete("{id}")]
@@ -61,6 +61,6 @@ public class AutorController : ControllerBase
         if (autor == null) return NotFound();
 
         await _autorRepository.DeleteAsync(id);
-        return NoContent();
+        return Ok();
     }
 }
